@@ -429,10 +429,7 @@ const Reports = () => {
       "Date": formatDateTimeForExcel(project.date),
       "Unit No": project.unit_no || "Not specified",
       "Remarks": project.remark || "No remarks added",
-      "Follow Up Date": formatDateTimeForExcel(project.follow_up_date),
-      "Project Type": project.project_type || "N/A",
-      "Budget": project.budget || "N/A",
-      "Source": project.source || "N/A"
+      
     }))
 
     // Create worksheet
@@ -608,7 +605,7 @@ const Reports = () => {
 
       {/* Detail Modal */}
       {modalVisible && selectedProject && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center  bg-opacity-50 backdrop-blur-sm">
           <div className="bg-white rounded-lg max-w-2xl max-h-[80vh] overflow-y-auto m-4 w-full">
             <div className="px-6 py-4 border-b flex justify-between items-center">
               <h3 className="text-lg font-semibold">Project Details</h3>
@@ -633,10 +630,10 @@ const Reports = () => {
                     <span className="font-medium text-gray-600">Executive:</span>
                     <span className="text-gray-900">{selectedProject.executive_name || "N/A"}</span>
                   </div>
-                  <div className="flex justify-between">
+                  {/* <div className="flex justify-between">
                     <span className="font-medium text-gray-600">Interaction Type:</span>
                     <span className="text-gray-900">{selectedProject.project_id || "N/A"}</span>
-                  </div>
+                  </div> */}
                   
                   
                   <div className="flex justify-between items-center">
