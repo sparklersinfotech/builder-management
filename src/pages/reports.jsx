@@ -343,22 +343,27 @@ const Reports = () => {
     }
   }, [location])
 
-  const fetchProjectDetails = async (customerId) => {
-    try {
-      setIsLoading(true)
-      const response = await api.get(`/customer-details/${customerId}`)
-      if (response.data.success) {
-        setProjectDetails(response.data.data)
-      } else {
-        alert("Failed to fetch project details")
-      }
-    } catch (error) {
-      console.error("Error fetching project details:", error)
+ const fetchProjectDetails = async (customerId) => {
+  try {
+    setIsLoading(true)
+    const response = await api.get(`/customer-details/${customerId}`)
+    if (response.data.success) {
+      // Sort by created_at descending
+      const sortedData = response.data.data.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      )
+      setProjectDetails(sortedData)
+    } else {
       alert("Failed to fetch project details")
-    } finally {
-      setIsLoading(false)
     }
+  } catch (error) {
+    console.error("Error fetching project details:", error)
+    alert("Failed to fetch project details")
+  } finally {
+    setIsLoading(false)
   }
+}
+
 
   const handleProjectPress = (project) => {
     setSelectedProject(project)
@@ -561,7 +566,7 @@ const Reports = () => {
             <div className="col-span-1">Sr.</div>
             <div className="col-span-4">Project</div>
             <div className="col-span-3">Executive</div>
-            <div className="col-span-4">Status</div>
+            <div className="col-span-4">Status...</div>
           </div>
 
           {/* Table Body */}
